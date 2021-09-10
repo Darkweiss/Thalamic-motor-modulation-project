@@ -10,9 +10,9 @@
 %%%CAMERAS IT IS SET AT 0 0 0
 
 function[coordinates_3D,miss] = triangulate_DLC(files,P)
-Nbp = 5;
+Nbp = 8;
 Ncam = 5;
-THlike = 0.2;
+THlike = 0.6;
 load Arena_2.0.mat
 good_camera = true(Nbp,Ncam);
 x_multi = cell(1,Nbp);
@@ -59,6 +59,7 @@ for u=1:Nframe
             X(:,n) = ls_triangulate(x_multi{n}(:,ind_ok),P(ind_ok));
             temp_3D_coordinates(n,:,u)= X((1:3),n);
         else
+            temp_3D_coordinates(n,:,u)= NaN;
             miss(n,u)=true;
         end
         
