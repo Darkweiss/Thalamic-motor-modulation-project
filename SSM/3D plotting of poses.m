@@ -17,10 +17,10 @@ n_clusters=5;
 idx=idx_all(~isnan(idx_all));
 Y =tsne(coordinates_3D_squeezed);
 %gscatter(Y(:,1),Y(:,2),idx)
-
+%this clustering is just a proof of concept (the poses are not aligned)
 
 %% plotting loop
-%t-sen stuff
+%t-sne stuff
 tsne_i = 1;
 figure('units','normalized','outerposition',[0 0 1 1])
 h1=subplot(2,2,4);

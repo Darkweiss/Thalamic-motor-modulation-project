@@ -18,23 +18,32 @@ end
 
 %kmeans and t-sne
 coordinates_3D_squeezed = reshape(poses,[24,N])'; %% the data is now X coordinates of all landmarks, then Y then Z
-n_clusters=10;
+n_clusters=8;
 [idx,C] = kmeans(coordinates_3D_squeezed,n_clusters);
 Y =tsne(coordinates_3D_squeezed);
 figure
 gscatter(Y(:,1),Y(:,2),idx)
 
-%%plot the clusters
+%% plot the clusters
 %get means for all clusters
 for i=1:n_clusters
     %get indicies
     idx_clusters = find(idx==i);
     for i_landmarks=1:8
         for i_dim = 1:3
-        cluster_means{i}=mean(poses(i_landmarks,i_dim,idx_clusters));
+        cluster_means{i}(i_landmarks,i_dim)=mean(poses(i_landmarks,i_dim,idx_clusters));
         end
     end
 end
+%actual plotting
+cval = 'rbbccgmy';
+figure
 for i=1:n_clusters
-    plot3(
+    for i_landmarks=1:8
+        subplot(5,2,i)
+        plot3(cluster_means{i}(i_landmarks,1),cluster_means{i}(i_landmarks,2),cluster_means{i}(i_landmarks,3),'.','MarkerSize',20,'Color',cval(i_landmarks))
+        hold on
+        xlim([-10 10]); ylim([-10 10]); zlim([-3 5]);  
+        view([90 0])
+    end
 end
