@@ -5,29 +5,14 @@ Np = 8;
 line_color = 'k';
 cval = 'rbbccgmy';
 figure; h = subplot(1,2,1); hold on;
-poses = coordinates3D;
+poses = coordinates_3D;
 video = '385 3_2021-07-07-133631-0000.avi';
 obj = VideoReader([video]);
 views = [[180 90],[90 0]];
 
-%% kmeans+tsne
-coordinates_3D_squeezed = reshape(coordinates_3D,[24,5400])'; %% the data is now X coordinates of all landmarks, then Y then Z
-n_clusters=5;
-[idx_all,C] = kmeans(coordinates_3D_squeezed,n_clusters);
-idx=idx_all(~isnan(idx_all));
-Y =tsne(coordinates_3D_squeezed);
-%gscatter(Y(:,1),Y(:,2),idx)
-%this clustering is just a proof of concept (the poses are not aligned)
-
 %% plotting loop
-%t-sne stuff
-tsne_i = 1;
+
 figure('units','normalized','outerposition',[0 0 1 1])
-h1=subplot(2,2,4);
-gscatter(Y(:,1),Y(:,2),idx)
-hLeg = legend('example');
-set(hLeg,'visible','off')
-hold on
 
 
 for n=1:5400
@@ -56,13 +41,6 @@ for n=1:5400
     
     subplot(2,2,3);
     imshow(read(obj,n))
-    
-    subplot(2,2,4);
-    hold on
-    if ~isnan(idx_all(n))
-        plot(Y(tsne_i,1),Y(tsne_i,2),'.','Color','k','MarkerSize',20)
-        tsne_i=tsne_i+1;
-    end
     
     pause(0.01)
     %clf;
