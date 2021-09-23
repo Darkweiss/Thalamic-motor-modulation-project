@@ -6,7 +6,7 @@ function[Data_3D_refined,b,T] = main_3D_SSM_reconstruct_luka(data)
 
 %%%%%%%%%%%THIS PART IS ONLY TO GENERATE SIMULATED DATA%%%%%%%%%%%%%%%
 %  [Data_3D_original,Data_3D] = simulate_SSM_data_180621(false);
-[Data_3D] = data;
+[Data_3D] = poses;
 [Np,~,N] = size(Data_3D);
 %%%%%%%%%%%%%%TRAIN SSM%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %take a random fraction of the simulated data to train a SSM
