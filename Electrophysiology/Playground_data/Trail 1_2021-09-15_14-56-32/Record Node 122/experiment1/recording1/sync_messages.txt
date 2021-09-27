@@ -1,0 +1,4 @@
+Software time: 12246889@10000000Hz
+Processor: Neuropix-PXI Id: 100 subProcessor: 0 start time: 12246901@30000Hz
+Processor: Neuropix-PXI Id: 100 subProcessor: 1 start time: 1020576@2500Hz
+Processor: NI-DAQmx Id: 101 subProcessor: 0 start time: 12282001@30000Hz
