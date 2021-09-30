@@ -6,7 +6,7 @@ line_color = 'k';
 cval = 'rbbccgmy';
 figure; h = subplot(1,2,1); hold on;
 poses = coordinates_3D;
-video = '385 3_2021-07-07-133631-0000.avi';
+video = 'Camera_1_trial_3_2021-09-15-151353-0000.avi';
 obj = VideoReader([video]);
 views = [[180 90],[90 0]];
 
