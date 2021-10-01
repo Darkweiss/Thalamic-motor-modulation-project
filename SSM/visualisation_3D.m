@@ -6,7 +6,7 @@ line_color = 'k';
 cval = 'rbbccgmy';
 figure; h = subplot(1,2,1); hold on;
 poses = coordinates_3D;
-video = 'Camera_1_trial_3_2021-09-15-151353-0000.avi';
+video = 'Camera_1_trial_2_2021-09-24-103355-0000.avi';
 obj = VideoReader([video]);
 views = [[180 90],[90 0]];
 
@@ -15,7 +15,7 @@ views = [[180 90],[90 0]];
 figure('units','normalized','outerposition',[0 0 1 1])
 
 
-for n=1:5400
+for n=1:1500
     for m=1:2
         subplot(2,2,m)
         for i = 1:Np

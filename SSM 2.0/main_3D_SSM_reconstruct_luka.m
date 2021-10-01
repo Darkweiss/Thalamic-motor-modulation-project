@@ -11,7 +11,7 @@ function[Data_3D_refined,b,T] = main_3D_SSM_reconstruct_luka(data)
 %%%%%%%%%%%%%%TRAIN SSM%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %take a random fraction of the simulated data to train a SSM
 ind_train = randperm(N); 
-ind_train = ind_train(1:1000);
+ind_train = ind_train(1:1300);
 Data_3D_train =  Data_3D(:,:,ind_train);
 
 %%%%%%%%%%%%%%%%ESTIMATE SSM%%%%%%%%%%%%%%%%%%%%%%%%%%
