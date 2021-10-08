@@ -12,7 +12,7 @@
 function[coordinates_3D,miss] = triangulate_DLC(files,P)
 Nbp = 8;
 Ncam = 4;
-THlike = 0.4;
+THlike = 0.6;
 load Arena_2.0.mat
 good_camera = true(Nbp,Ncam);
 x_multi = cell(1,Nbp);

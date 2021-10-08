@@ -42,13 +42,14 @@ for i=1:numel(templateDepths)
         n_idx              = find(spikes > bins(n) & spikes < bins(n+1)); %get spike indicies that fire during a bin
         binned_spikes(i,n) = numel(n_idx);    
     end % end bin iteration
-     i
+     %i
 end %neuron_id iteration
 
 %% plotting
 figure
 norm_binned_spikes = flip(normr(binned_spikes)); %normalise and flip (channel 1 is on the bottom now)
-h = heatmap(norm_binned_spikes);
+h = heatmap(norm_binned_spikes(:,1:50));
+
 h.YDisplayData = flipud(h.YDisplayData);  % equivalent to 'YDir', 'Reverse'
 h.GridVisible = 'off';
 end %end function
