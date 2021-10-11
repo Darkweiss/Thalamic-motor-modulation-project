@@ -48,7 +48,7 @@ end %neuron_id iteration
 %% plotting
 figure
 norm_binned_spikes = flip(normr(binned_spikes)); %normalise and flip (channel 1 is on the bottom now)
-h = heatmap(norm_binned_spikes(:,1:50));
+h = heatmap(normr_binned_spikes(:,1:80));
 
 h.YDisplayData = flipud(h.YDisplayData);  % equivalent to 'YDir', 'Reverse'
 h.GridVisible = 'off';
