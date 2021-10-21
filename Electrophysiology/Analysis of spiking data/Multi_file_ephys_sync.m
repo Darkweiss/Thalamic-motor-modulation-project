@@ -1,12 +1,10 @@
-%%% this function will take as input the directory with all ephys files
-%%% inside and store individual trials in a struct
-% function data = sync_multiple_files(path,trial_n)
-%     
-% end
+function [synced_spikes, templateDepths] = Multi_file_ephys_sync(path,number_of_trials)
+% Input: the directory with all ephys files inside and the number of trials and store individual trials in a struct
+% Output: 
+% Synced_spikes - Spike timings for individual trials
+% templateDepths - Depths of all templates
 
-%get the directory path
-number_of_trials = 7;
-path = 'C:\Ephys data\Chronic ephys\Chronic_mouse5_383780\Day 1 ephys\';
+%move to the directory path
 cd(path)
 %% kilosort data
 kilosort_path = [path 'kilosort\'];
@@ -66,4 +64,5 @@ for trial_n = 1: number_of_trials
     %add to the trial start time
     start = start + (continuous_timestamps(end)-continuous_timestamps(1));
     %clear continuous_timestamps
-end
+end % end trial number
+end % end function

@@ -1,4 +1,4 @@
-function[norm_binned_spikes] = whisker_stimulation(path)
+function[binned_spikes,templateDepths] = whisker_stimulation(path)
 % whisker_stimulation plots a heatmap of firing rate over time so the
 % neurons responding to whisker stimulation can be separated from the rest
 %input: path with the kilosort output files
@@ -48,7 +48,9 @@ end %neuron_id iteration
 %% plotting
 figure
 norm_binned_spikes = flip(normr(binned_spikes)); %normalise and flip (channel 1 is on the bottom now)
-h = heatmap(normr_binned_spikes(:,1:80));
+h = heatmap(binned_spikes(59:140,1:50));
+
+%59:140
 
 h.YDisplayData = flipud(h.YDisplayData);  % equivalent to 'YDir', 'Reverse'
 h.GridVisible = 'off';

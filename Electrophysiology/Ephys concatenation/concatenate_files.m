@@ -1,7 +1,7 @@
 %concatinate all the files for kilosort and read the corresponding body cam
 %triggers
 %% get file names
-path = 'C:\Ephys data\Chronic ephys\Chronic_mouse5_383780\Day 1 ephys\'; %this is the path where the folders produced by openephys are
+path = 'C:\Ephys data\Chronic ephys\Chronic_mouse5_383780\Day 6\'; %this is the path where the folders produced by openephys are
 cd(path);
 Files = dir(path);
 %get file names
@@ -10,8 +10,8 @@ for n = 1 : length(Files)
 end
 
 %% go over the files and combine them
-kilosort_files = file_names(3:9); %select the files you want for kilosort
-[fid_write, errmsg] = fopen('combined.dat', 'w'); %create a a new file to write on
+kilosort_files = file_names(3:4); %select the files you want for kilosort
+[fid_write, errmsg] = fopen('combined_data.dat', 'w'); %create a a new file to write on
 
 
 for i = 1:length(kilosort_files)
