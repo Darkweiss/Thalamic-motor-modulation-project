@@ -27,3 +27,8 @@ save('ephys','synced_spikes','templateDepths');
 
 %% prepare the body cam data
 [final_landmarks] = Prep_3D_coordinates(refined_landmarks,synced_spikes,raw_landmarks);
+
+%% Place cell plots
+selected_neurons = [490:548];
+trial_n = 3;
+Place_cells(trial_n, selected_neurons, final_landmarks, synced_spikes)
