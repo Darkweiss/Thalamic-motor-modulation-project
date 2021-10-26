@@ -27,7 +27,8 @@ save('ephys','synced_spikes','templateDepths');
 
 %% prepare the body cam data
 [final_landmarks] = Prep_3D_coordinates(refined_landmarks,synced_spikes,raw_landmarks);
-
+cd(work)
+save('3D_landmarks', 'final_landmarks');
 %% Place cell plots
 selected_neurons = [24];
 trial_n = 3;
@@ -37,3 +38,9 @@ Place_cells(trial_n, selected_neurons, final_landmarks, synced_spikes)
 for trial = 1:number_of_trials
    Plot_position_trial(trial,final_landmarks,work) 
 end
+
+%% rasmus' coefficient tuning curves
+cd(work)
+save('coefficients','coeffs');
+
+

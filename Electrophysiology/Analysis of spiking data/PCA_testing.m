@@ -7,17 +7,19 @@ counter=1;
 for trial = 1:7
     temp = zeros(548,540);
     for neuron = 1:numel(synced_spikes{1}(:,1))
-        for idx = 1:2:numel(idxs)
+        for idx = 1:numel(idxs)
             temp(neuron,counter) = sum(synced_spikes{trial}(neuron,idxs(idx):(idxs(idx)+1)));
             counter=counter+1;
         end
+        counter = 1;
         neuron
     end
+    binned{trial} = temp;
 end
 
 PCA = [];
 for trial = 1:7
-    PCA = cat(2,PCA,synced_spikes{trial});
+    PCA = cat(2,PCA,binned{trial});
 end
    
 PCA = PCA';
@@ -49,7 +51,7 @@ plot(cumsum(tmp(end:-1:1)),'.')
 
 %%
 trial = 1;
-data = synced_spikes{trial};
+data = binned{trial};
 figure
 ax(1) = subplot(3,3,[1:6]);
 imagesc(data)
