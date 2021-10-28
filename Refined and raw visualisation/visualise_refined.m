@@ -1,21 +1,20 @@
 %This code plots 2 3D views and a video of the mouse and a tsne plot with
 %kmeans clustered labels 
-function[] = visualise_refined(refined, raw)
+function[] = visualise_refined(refined, raw, video)
 Np = 8;
 line_color = 'k';
 cval = 'rbbccgmy';
-figure; h = subplot(2,2,1); hold on;
+figure('units','normalized','outerposition',[0 0 1 1]); h = subplot(2,2,1); hold on;
 views = [[180 90],[90 0]];
 poses{1} = refined;
 poses{2} = raw;
 strings = {'refined','raw'};
-
-writerObj = VideoWriter('full.avi');
-writerObj.FrameRate = 30;
-open(writerObj);
-
+if video
+    writerObj = VideoWriter('full.avi');
+    writerObj.FrameRate = 30;
+    open(writerObj);
+end
 %plotting loop
-figure('units','normalized','outerposition',[0 0 1 1])
 for n=1:numel(refined(1,1,:))
     counter = 1;
     for n_files = 1:2         
@@ -45,10 +44,14 @@ for n=1:numel(refined(1,1,:))
         end
     end % end file loop
     pause(0.1)
-    F = getframe(gcf);
-    writeVideo(writerObj, F);
-    clear F
+    if video
+        F = getframe(gcf);
+        writeVideo(writerObj, F);
+        clear F
+    end
     clf;
 end %end frameloop
-close(writerObj);
+if video
+    close(writerObj);
+end
 end %end function

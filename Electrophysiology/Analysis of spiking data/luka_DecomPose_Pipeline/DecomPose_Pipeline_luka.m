@@ -22,14 +22,14 @@ plot_mouse_landmark_movie(final_landmarks{1}(:,:,1:100),'-',step)
 
 %% compute the shape PCA using wide sample of data (multiple videos):
 Nshape = 3;
-[vec,val] = DecomPose_PCA(final_landmarks, 3);
+[vec,val] = DecomPose_PCA(final_landmarks, Nshape);
 vec = vec(:,end:-1:end-Nshape+1);
 
 %% for a selected video, decompose the 3D in each frame into coefficients of
 % rigid motion (location, angle) and shape:
 clear coeffs
 for i = 1:7
-    [coeffs{i}, nans{i}] = DecomPose(final_landmarks{i},video{i},vec,0.1,true);
+    [coeffs{i}, nans{i}] = DecomPose(final_landmarks{i},video{i},vec,false,false);
     i
 end
 clear i

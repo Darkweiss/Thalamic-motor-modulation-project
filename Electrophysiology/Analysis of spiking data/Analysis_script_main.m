@@ -30,8 +30,8 @@ save('ephys','synced_spikes','templateDepths');
 cd(work)
 save('3D_landmarks', 'final_landmarks');
 %% Place cell plots
-selected_neurons = [24];
-trial_n = 3;
+selected_neurons = [421];
+trial_n = 5;
 Place_cells(trial_n, selected_neurons, final_landmarks, synced_spikes)
 
 %% Mouse position during a trial plot
