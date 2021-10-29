@@ -30,13 +30,14 @@ save('ephys','synced_spikes','templateDepths');
 cd(work)
 save('3D_landmarks', 'final_landmarks');
 %% Place cell plots
-selected_neurons = [421];
-trial_n = 5;
-Place_cells(trial_n, selected_neurons, final_landmarks, synced_spikes)
-
+selected_neurons = [24];
+for trial = 1:number_of_trials
+    Place_cells(trial, selected_neurons, final_landmarks, synced_spikes)
+    title(['Trial ' num2str(trial)])
+end
 %% Mouse position during a trial plot
 for trial = 1:number_of_trials
-   Plot_position_trial(trial,final_landmarks,work) 
+   Plot_position_trial(trial,final_landmarks,work)
 end
 
 %% rasmus' coefficient tuning curves
