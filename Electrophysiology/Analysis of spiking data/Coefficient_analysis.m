@@ -49,14 +49,14 @@ end
 
 
 %% bigger bins
-metric = 3;
+metric = 7;
 
 metric_mean = mean(all_coeffs(:,metric));
 metric_std = std(all_coeffs(:,metric));
 metric_sem = metric_std/(length(all_coeffs(:,metric)));
-bin_edges = 2:0.5:9;
+%bin_edges = 2:0.5:9;
 %bin_edges = -270:10:270; %angle edges
-%bin_edges = -4:0.5:4; %PCA edges
+bin_edges = -4:0.5:4; %PCA edges
 %bin_edges = 0:0.1:1.2; %locomotion edgees
 spike_sum = 0;
 neuron = zeros(numel(binned_spikes(:,1)),numel(bin_edges)-1);

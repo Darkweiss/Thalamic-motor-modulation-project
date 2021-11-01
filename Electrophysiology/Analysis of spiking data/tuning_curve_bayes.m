@@ -39,16 +39,17 @@ xmax = prctile(x,pmtrs.prctilehi);
 xedges = linspace(xmin,xmax,pmtrs.Nbins);
 xbc = 0.5*xedges(1:end-1)+0.5*xedges(2:end);
 
-Hx = histogram(x,'BinEdges',xedges);
-Px = Hx.Values/sum(Hx.Values);
+[Hxvalues, ~] = histcounts(x,xedges);
+Px = Hxvalues/sum(Hxvalues); %get the probability distribution
 
-Py1 = sum(y)/N; % ie P(y==1)
+Py1 = sum(y)/N; % ie P(y==1) %probability distribution for spikes
 
-Hxy1 = histogram(x(y==1),'BinEdges',xedges);
-Pxy1 = Hxy1.Values/sum(Hxy1.Values);  % ie P(x|y==1)
+[Hxy1values, ~] = histcounts(x(y==1),xedges);
+Pxy1 = Hxy1values/sum(Hxy1values);  % ie P(x|y==1) %contitional probability of coefficient when there are spikes
 
 Eyx = Py1*Pxy1./Px; % ie E[y|x]
 
- figure, plot(xbc,Eyx,'.-',xbc,(xbc>0.5).*(xbc-.5),'k-'), legend('Estimated','Theoretical'), title('Tuning curve')
+%figure, plot( xbc,(xbc>0.5).*(xbc-.5),'k-'),legend('Theoretical')
+figure,plot(xbc,Eyx,'.-'), legend('Estimated'), title('Tuning curve')
 
 
