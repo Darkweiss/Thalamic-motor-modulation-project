@@ -40,7 +40,7 @@ xedges = linspace(xmin,xmax,pmtrs.Nbins);
 xbc = 0.5*xedges(1:end-1)+0.5*xedges(2:end);
 
 [Hxvalues, ~] = histcounts(x,xedges);
-Px = Hxvalues/sum(Hxvalues); %get the probability distribution
+Px = Hxvalues/sum(Hxvalues); %get the probability distribution for coefficients
 
 Py1 = sum(y)/N; % ie P(y==1) %probability distribution for spikes
 
@@ -50,6 +50,6 @@ Pxy1 = Hxy1values/sum(Hxy1values);  % ie P(x|y==1) %contitional probability of c
 Eyx = Py1*Pxy1./Px; % ie E[y|x]
 
 %figure, plot( xbc,(xbc>0.5).*(xbc-.5),'k-'),legend('Theoretical')
-figure,plot(xbc,Eyx,'.-'), legend('Estimated'), title('Tuning curve')
+plot(xbc,Eyx,'b.-'), title('Tuning curve')
 
 

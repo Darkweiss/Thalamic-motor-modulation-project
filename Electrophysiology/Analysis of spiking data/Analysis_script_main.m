@@ -40,6 +40,8 @@ for trial = 1:number_of_trials
    Plot_position_trial(trial,final_landmarks,work)
 end
 
+%% Bayes tuning curves
+
 %% rasmus' coefficient tuning curves
 cd(work)
 save('coefficients','coeffs');
