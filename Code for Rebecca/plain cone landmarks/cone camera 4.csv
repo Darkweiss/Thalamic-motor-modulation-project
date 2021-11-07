@@ -1,0 +1,4 @@
+scorer,RS,RS,RS,RS,RS,RS,RS,RS,RS,RS,RS,RS,RS,RS,RS,RS,RS,RS
+bodyparts,top,top,bottom 1,bottom 1,bottom 2,bottom 2,bottom 3,bottom 3,bottom 4,bottom 4,mid 1,mid 1,mid 2,mid 2,mid 3,mid 3,mid 4,mid 4
+coords,x,y,x,y,x,y,x,y,x,y,x,y,x,y,x,y,x,y
+labeled-data\cone camera 4_2021-11-04-093825-0000\img006.png,604.9342964310396,400.1648899417629,,,,,539.9569285220754,632.639472904945,678.5753133945319,629.7515898867689,,,,,570.2797002129251,525.7878012324264,645.3646586855058,524.3438597233384
