@@ -1,17 +1,24 @@
 %%% prepare the spiking data so that it is in larger bins, includes neurons
 %%% with a sufficient number of spikes and includes good neurons only
 
-kilosort_folder = 'C:\Ephys data\Chronic ephys\Chronic_mouse5_383780\Day 1 ephys\kilosort';
+kilosort_folder = 'C:\Ephys data\Chronic ephys\Chronic_mouse5_383780\Electrophysiology\Day 2\kilosort';
 addpath(kilosort_folder);
 load rez
 spike_threshold = 1000;
 bad_idx = find(rez.good==0);
 
-trials = 7;
+trials = 6;
 all_spikes = [];
 for trial = 1:trials
     all_spikes = cat(2,all_spikes,synced_spikes{trial});
 end
+
+all_coeffs = [];
+for trial = 1:trials
+    all_spikes = cat(2,all_spikes,synced_spikes{trial});
+    all_coeffs = cat(1,all_coeffs,coeffs{trial});
+end
+
 
 all_spikes(bad_idx,:) = NaN; %remove the 'bad' neurons
 [no_spikes_idx] = find(sum(all_spikes,2)< spike_threshold); %remove neurons with less than 1000 spikes

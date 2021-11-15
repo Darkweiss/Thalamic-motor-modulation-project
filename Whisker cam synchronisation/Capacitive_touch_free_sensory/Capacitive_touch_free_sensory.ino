@@ -1,6 +1,6 @@
 
 // 0x0F (120x), ... , 0x7F (1x)
-#define sensitivity 0x0F
+#define sensitivity 0x3F
 
 // INCLUDES
 //generic Arduino library for I2C interface
@@ -12,7 +12,7 @@
 //CONSTANTS
 //LED pin will be driven HIGH to indicate when input is detected
 const byte ledPin = LED_BUILTIN;
-
+const byte ledPin_bnc = 13;
 //GLOBALS
 //Declare a CAP118 object
 Adafruit_CAP1188 cap = Adafruit_CAP1188();
@@ -37,7 +37,7 @@ void setup (){
 
   //Configure the output pin
   pinMode(ledPin, OUTPUT);
-
+  pinMode(ledPin_bnc, OUTPUT);
   //Read the registry value at address 0x1F, which contains the sensitivity in bits 4,5,6
   //We use a bitwise and mask of 0x0F to retrieve the low bits and clear these high bits
   uint8_t reg = cap.readRegister(0x1F) & 0x0F;
@@ -48,6 +48,7 @@ void setup (){
 //This function is called once when a new object is detected
 void inputDetected() {
   digitalWrite(ledPin,HIGH);
+  digitalWrite(ledPin_bnc,HIGH);
   Serial.print(F("New input detected!"));
   detected = true;
 }
@@ -61,6 +62,7 @@ void inputHeld() {
 //This function is called once when an object is removed
 void inputRemoved() {
   digitalWrite(ledPin,LOW);
+  digitalWrite(ledPin_bnc,LOW);
   Serial.println(F("removed"));
   detected = false;
 }

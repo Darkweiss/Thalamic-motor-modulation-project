@@ -13,11 +13,11 @@ clear all
 final_landmarks_vid{1} = 'C:\Users\mjcssrp\Dropbox (The University of Manchester)\170320\lab and lab meetings\motor state project\video rebecca oct2021\for Rasmus triangulation cones M1\mouse 1_ bottom obj_nor 3\mouse 1_bottom obj_nor 3_triangulated.mat';
 object{1} = 'no obj';
 for i=1:7
-    video{i} = 'C:\Ephys data\Chronic ephys\Chronic_mouse5_383780\Day 1 bodycams\Camera_1_trial_1_2021-10-05-141150-0000.avi';
+    video{i} = 'C:\Ephys data\Chronic ephys\Chronic_mouse5_383780\Bodycams\Day 2\Camera_1_trial_1_2021-10-06-135852-0000.avi';
 end
 %% animate the 3D pose data
 step = 1;
-plot_mouse_landmark_movie(final_landmarks{1}(:,:,1:100),'-',step)
+plot_mouse_landmark_movie(final_landmarks{3}(:,:,1:100),'-',step)
 
 
 %% compute the shape PCA using wide sample of data (multiple videos):
@@ -28,8 +28,8 @@ vec = vec(:,end:-1:end-Nshape+1);
 %% for a selected video, decompose the 3D in each frame into coefficients of
 % rigid motion (location, angle) and shape:
 clear coeffs
-for i = 1:7
-    [coeffs{i}, nans{i}] = DecomPose(final_landmarks{i},video{i},vec,false,false);
+for i = 1:6
+    [coeffs{i}, nans{i}] = DecomPose(final_landmarks{i},video{i},vec,0.1,false);
     i
 end
 clear i

@@ -2,7 +2,7 @@
 %get all the bins of Bayes tuning curves
 Eyx = {};
 for i=1:numel(analysis_id)
-[Eyx{i},xbc] = tuning_curve_bayes(binned_coefficient(5,:),binned_spikes(analysis_id(i),:),pmtrs);
+[Eyx{i},xbc] = tuning_curve_bayes(binned_coefficient(7,:),binned_spikes(analysis_id(i),:),pmtrs);
 end
 
 %% get the differences
@@ -16,7 +16,7 @@ A=pre_idx(end-10:end)
 %% get the ratio between min and max
 diff =[];
 for i=1:numel(analysis_id)
-diff(i) = min(Eyx{i})/max(Eyx{i});
+diff(i) = median(Eyx{i})/max(Eyx{i});
 end
 [sorted, pre_idx] = sort(diff);
 sorted(1:10)

@@ -4,7 +4,7 @@
 %%% 3
 coefficient_strings = {'Centroid X','Centroid Y','Centroid Z','Yaw angle','Roll angle','Pitch angle','PC 1','PC2','PC3','speed'};
 
-trials = 7;
+trials = 6;
 all_spikes = [];
 all_coeffs = [];
 for trial = 1:trials

@@ -1,7 +1,7 @@
 %This code plots 2 3D views and a video of the mouse and a tsne plot with
 %kmeans clustered labels 
 function[] = visualise_refined(refined, raw, video)
-Np = 8;
+Np = 7;
 line_color = 'k';
 cval = 'rbbccgmy';
 figure('units','normalized','outerposition',[0 0 1 1]); h = subplot(2,2,1); hold on;
@@ -12,7 +12,7 @@ strings = {'refined','raw'};
 if video
     writerObj = VideoWriter('full.avi');
     writerObj.FrameRate = 30;
-    open(writerObj);
+    open(writerObj)
 end
 %plotting loop
 for n=1:numel(refined(1,1,:))
@@ -33,7 +33,7 @@ for n=1:numel(refined(1,1,:))
             line([poses{n_files}(3,1,n), poses{n_files}(6,1,n)],[poses{n_files}(3,2,n), poses{n_files}(6,2,n)],[poses{n_files}(3,3,n), poses{n_files}(6,3,n)],'Color','k','LineWidth',0.1); %Link neck base with right ear
             line([poses{n_files}(2,1,n), poses{n_files}(6,1,n)],[poses{n_files}(2,2,n), poses{n_files}(6,2,n)],[poses{n_files}(2,3,n), poses{n_files}(6,3,n)],'Color','k','LineWidth',0.1); %Link neck base with left ear
             line([poses{n_files}(7,1,n), poses{n_files}(6,1,n)],[poses{n_files}(7,2,n), poses{n_files}(6,2,n)],[poses{n_files}(7,3,n), poses{n_files}(6,3,n)],'Color','k','LineWidth',0.1); %Link neck base with midpoint
-            line([poses{n_files}(7,1,n), poses{n_files}(8,1,n)],[poses{n_files}(7,2,n), poses{n_files}(8,2,n)],[poses{n_files}(7,3,n), poses{n_files}(8,3,n)],'Color','k','LineWidth',0.1); %Link midpoint with tail base
+            %line([poses{n_files}(7,1,n), poses{n_files}(8,1,n)],[poses{n_files}(7,2,n), poses{n_files}(8,2,n)],[poses{n_files}(7,3,n), poses{n_files}(8,3,n)],'Color','k','LineWidth',0.1); %Link midpoint with tail base
 
             xlabel('X'); ylabel('Y'); zlabel('Z');
             title([num2str(n) '     ' strings{n_files}])

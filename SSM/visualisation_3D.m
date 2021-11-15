@@ -5,8 +5,8 @@ Np = 8;
 line_color = 'k';
 cval = 'rbbccgmy';
 figure; h = subplot(1,2,1); hold on;
-poses = final_landmarks{1};
-video = 'camera4_trial_1_2021-10-01-141146-0000.avi';
+poses = separated{2};
+video = 'Camera_1_trial_2_2021-10-06-143439-0000.avi';
 %obj = VideoReader([video]);
 views = [[180 90],[90 0]];
 

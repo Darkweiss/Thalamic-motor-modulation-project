@@ -4,7 +4,7 @@
 %make bins larger
 idxs = 1:10:numel(synced_spikes{1}(1,:));
 counter=1;
-for trial = 1:7
+for trial = 1:6
     temp = zeros(548,540);
     for neuron = 1:numel(synced_spikes{1}(:,1))
         for idx = 1:numel(idxs)
@@ -18,7 +18,7 @@ for trial = 1:7
 end
 
 PCA = [];
-for trial = 1:7
+for trial = 1:6
     PCA = cat(2,PCA,binned{trial});
 end
    

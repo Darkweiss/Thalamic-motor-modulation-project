@@ -13,7 +13,7 @@ function[coordinates_3D,miss] = triangulate_DLC(files,P)
 Nbp = 9; %nr of bodyparts
 Ncam = 4; %nr of cameras
 THlike = 0.6;
-load Arena_2.0.mat
+load P_in_cm.mat
 good_camera = true(Nbp,Ncam);
 x_multi = cell(1,Nbp);
 

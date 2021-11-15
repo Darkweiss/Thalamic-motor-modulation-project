@@ -3,7 +3,7 @@ function [final_landmarks] = Prep_3D_coordinates(refined_landmarks,spikes,raw_la
 counter_bad = 1;
 bad_frames = [];
 for i_frame = 1: numel(raw_landmarks(1,1,:))
-    if sum(ismissing(raw_landmarks(:,1,i_frame))) > 6
+    if sum(ismissing(raw_landmarks(:,1,i_frame))) > 5
         bad_frames(counter_bad) = i_frame;
         counter_bad = counter_bad +1;
     end
