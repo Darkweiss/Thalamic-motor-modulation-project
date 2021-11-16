@@ -10,5 +10,4 @@ for trial = 1:n_trials
     concatinated = cat(3,concatinated,separated{trial});
     temp = {};
 end %end trial loop
-save('Day 1 mouse 5', 'concatinated', 'separated');
 end % end funciton

@@ -1,17 +1,17 @@
-function[Data_3D_refined,b,T] = main_3D_SSM_reconstruct_luka()
+function[Data_3D_refined,b,T] = main_3D_SSM_reconstruct_luka(Data_3D)
 %%%%%the final outputs are:
 % Data_3D_refined
 % b: shape parameters
 % T: bosy translation on X,Y,Z axes
 
 %%%%%%%%%%%THIS PART IS ONLY TO GENERATE SIMULATED DATA%%%%%%%%%%%%%%%
-[Data_3D_original,Data_3D] = simulate_SSM_data_180621(false);
+%[Data_3D_original,Data_3D] = simulate_SSM_data_180621(false);
 [Np,~,N] = size(Data_3D);
 
 %%%%%%%%%%%%%%TRAIN SSM%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %take a random fraction of the simulated data to train a SSM
 ind_train = randperm(N); 
-ind_train = ind_train(1:250);
+ind_train = ind_train(1:30000);
 Data_3D_train =  Data_3D(:,:,ind_train);
 
 %%%%%%%%%%%%%%%%ESTIMATE SSM%%%%%%%%%%%%%%%%%%%%%%%%%%
