@@ -1,6 +1,5 @@
 %%% prepare the spiking data so that it is in larger bins, includes neurons
 %%% with a sufficient number of spikes and includes good neurons only
-
 kilosort_folder = 'C:\Ephys data\Chronic ephys\Chronic_mouse5_383780\Electrophysiology\Day 2\kilosort';
 addpath(kilosort_folder);
 load rez

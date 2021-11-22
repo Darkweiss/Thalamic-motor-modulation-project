@@ -2,10 +2,10 @@ function [locomotion_coeff] = locomotion(all_coeffs)
 %LOCOMOTION Outputs a locomotion coefficient
 %   Input: 3D position of body landmarks
 %   Output: Locomotion coefficient
-centroid = zeros(numel(all_coeffs(:,1)),3);
-centroid(:,1) = all_coeffs(:,1);
-centroid(:,2) = all_coeffs(:,2);
-centroid(:,3) = all_coeffs(:,3);
+centroid = zeros(numel(all_coeffs(1,:)),3);
+centroid(:,1) = all_coeffs(1,:);
+centroid(:,2) = all_coeffs(2,:);
+centroid(:,3) = all_coeffs(3,:);
 
 locomotion_coeff = distance_calc(centroid);
 

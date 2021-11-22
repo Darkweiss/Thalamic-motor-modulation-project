@@ -1,6 +1,6 @@
 
 // 0x0F (120x), ... , 0x7F (1x)
-#define sensitivity 0x3F
+#define sensitivity 0x1F
 
 // INCLUDES
 //generic Arduino library for I2C interface

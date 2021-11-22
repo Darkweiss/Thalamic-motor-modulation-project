@@ -1,21 +1,12 @@
-function [final_landmarks] = Prep_3D_coordinates(refined_landmarks,spikes,raw_landmarks)
-%% detect bad frames
-counter_bad = 1;
-bad_frames = [];
-for i_frame = 1: numel(raw_landmarks(1,1,:))
-    if sum(ismissing(raw_landmarks(:,1,i_frame))) > 5
-        bad_frames(counter_bad) = i_frame;
-        counter_bad = counter_bad +1;
-    end
-end %end frame loop
+function [final_landmarks] = Prep_3D_coordinates(refined_landmarks,spikes, bad_frames)
 %% add back the bad frames to refined landmakrs as NaNs
 %bad frames could not be refined as not enough landmarks are visible; they
 %need to be sorted by size!!!
 if numel(bad_frames) > 0
     refined_w_bad = refined_landmarks;
-    for i = numel(bad_frames)
-        refined_w_bad = cat(3,refined_w_bad(:,:,1:(bad_frames(i) - 1)),NaN(8,3));
-        refined_w_bad = cat(3,refined_w_bad,refined_landmarks(:,:,bad_frames(i):end));
+    for i = 1:numel(bad_frames)
+        refined_w_bad = cat(3,refined_w_bad(:,:,1:(bad_frames(i) - 1)),NaN(numel(refined_landmarks(:,1,1)),3));
+        refined_w_bad = cat(3,refined_w_bad,refined_landmarks(:,:,bad_frames(i)-i+1:end));
     end
     refined_landmarks = refined_w_bad; %store the full 3D coordinates in refined_landmarks
 end %end bad frame loop

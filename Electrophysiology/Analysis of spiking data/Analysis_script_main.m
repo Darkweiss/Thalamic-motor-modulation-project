@@ -8,6 +8,7 @@ n_landmarks = 7; % enter the number of landmarks
 number_of_trials = 6; % enter the number of trials
 n_cameras = 4; % enter the number of cameras
 landmarks_for_deletion = [4];
+spike_threshold = 1000; %how many spikes a neuron has to fire to be analysed
 %refined_landmarks = refined;
 %raw_landmarks = concatinated;
 %% prepare spiking data
@@ -32,15 +33,32 @@ save('ephys','synced_spikes','templateDepths');
 [concatinated, separated] = Triangulation_loop(body_cams,P, number_of_trials, n_cameras);
 [nan_idx, coordinates_no_nan] = modify_3D(concatinated,landmarks_for_deletion);
 
-[Data_3D_refined,b,T] = main_3D_SSM_reconstruct_luka_v1(concatinated);
-[final_landmarks] = Prep_3D_coordinates(Data_3D_refined,synced_spikes,raw_landmarks);
+[Data_3D_refined,b,T] = main_3D_SSM_reconstruct_luka_v1(coordinates_no_nan);
+[final_landmarks] = Prep_3D_coordinates(Data_3D_refined,synced_spikes,nan_idx);
 cd(work)
 save('3D_landmarks', 'final_landmarks');
 
-%% prepare the spiking data with Larger_bins script
+%% get coefficients for 3D landmarks
+%run PCA on data
+Nshape = 3; %number of PC
+[vec,val] = DecomPose_PCA(final_landmarks, Nshape);
+vec = vec(:,end:-1:end-Nshape+1);
+
+%get coefficients
+for i = 1:number_of_trials
+    [coeffs{i}, nans{i}] = DecomPose(final_landmarks{i},video{i},vec,false,false);
+    i
+end
+clear i
+
+for i = 1:number_of_trials
+    synced_spikes{i}(:,nans{i}) = [];
+end
+%% put data in larger bins
+[analysis_id,binned_coefficient,binned_spikes] = LargerBins(ephys_path,synced_spikes,coeffs,spike_threshold);
 
 %% Place cell plots
-selected_neurons = [23];
+selected_neurons = [3];
 for trial = 1:number_of_trials
     Place_cells(trial, selected_neurons, final_landmarks, synced_spikes)
     title(['Trial ' num2str(trial)])
@@ -51,9 +69,9 @@ for trial = 1:number_of_trials
 end
 
 %% Bayes tuning curves
-
-%% rasmus' coefficient tuning curves
-cd(work)
-save('coefficients','coeffs');
+pmtrs.prctilelo = 2.5; %low-cutoff for for coefficient
+pmtrs.prctilehi = 97.5; %high-cutoff for for coefficient
+pmtrs.Nbins = 10; %number of bins for the coefficient
+[Eyx,xbc] = tuning_curve_bayes(binned_coefficient(7,:),binned_spikes(41,:),pmtrs);
 
 
