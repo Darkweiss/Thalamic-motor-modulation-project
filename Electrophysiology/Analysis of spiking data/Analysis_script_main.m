@@ -74,4 +74,7 @@ pmtrs.prctilehi = 97.5; %high-cutoff for for coefficient
 pmtrs.Nbins = 10; %number of bins for the coefficient
 [Eyx,xbc] = tuning_curve_bayes(binned_coefficient(7,:),binned_spikes(41,:),pmtrs);
 
+%% shift the data
+[shifted_coeffs,shifted_spikes] = shift_time(binned_coefficient,binned_spikes,2000);
+
 

@@ -10,7 +10,7 @@
 %%%CAMERAS IT IS SET AT 0 0 0
 
 function[coordinates_3D,miss] = triangulate_DLC(files,P)
-Nbp = 10; %nr of bodyparts
+Nbp = 20; %nr of bodyparts
 Ncam = 4; %nr of cameras
 THlike = 0.6;
 good_camera = true(Nbp,Ncam);

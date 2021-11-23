@@ -10,10 +10,9 @@
 %%%CAMERAS IT IS SET AT 0 0 0
 
 function[coordinates_3D,miss] = triangulate_DLC(files,P)
-Nbp = 8;
+Nbp = 20;
 Ncam = 4;
 THlike = 0.6;
-load Arena_2.0.mat
 good_camera = true(Nbp,Ncam);
 x_multi = cell(1,Nbp);
 
