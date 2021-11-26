@@ -53,6 +53,7 @@ clear i
 
 for i = 1:number_of_trials
     synced_spikes{i}(:,nans{i}) = [];
+    final_landmarks{i}(:,:,nans{i}) = [];
 end
 %% put data in larger bins
 [analysis_id,binned_coefficient,binned_spikes] = LargerBins(ephys_path,synced_spikes,coeffs,spike_threshold);
@@ -74,7 +75,6 @@ pmtrs.prctilehi = 97.5; %high-cutoff for for coefficient
 pmtrs.Nbins = 10; %number of bins for the coefficient
 [Eyx,xbc] = tuning_curve_bayes(binned_coefficient(7,:),binned_spikes(41,:),pmtrs);
 
-%% shift the data
-[shifted_coeffs,shifted_spikes] = shift_time(binned_coefficient,binned_spikes,2000);
-
+%% A different approach to tuning curves with a time shift plot
+[tuning] = tuning_by_time(binned_coefficient(5,:),binned_spikes(analysis_id(67),:),pmtrs,1000,true)
 

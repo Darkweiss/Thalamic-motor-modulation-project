@@ -1,5 +1,7 @@
-function[tuning] = tuning_by_time(x,y,pmtrs,n_shuffles)
-
+function[tuning] = tuning_by_time(x,y,pmtrs,n_shifts,plotting)
+%%% This function takes as input a coefficient (x), single neuron spikes
+%%% (y), parameters (same as in tuning_curve_bayes), and the number of
+%%% shifts
 N = numel(x);
 if numel(y)~=N
     error('x and y must be same size')
@@ -23,31 +25,35 @@ tuning = spike_n./Hxvalues;%divide spikes by number of time
 
 %% shuffles
 %get random time shift intigers between ~20s after start of trial and 20s before end
-shuffle_times = randi([70 (numel(x(1,:))- 70)],1, n_shuffles);
-shuffle_matrix = zeros(n_shuffles,numel(Hxvalues)); %initialise the matrix to store data
-clear Hxvalues bin
+if plotting
+    shuffle_times = randi([70 (numel(x(1,:))- 70)],1, n_shifts);
+    shuffle_matrix = zeros(n_shifts,numel(Hxvalues)); %initialise the matrix to store data
+    clear Hxvalues bin
 
-for n = 1:n_shuffles
-    [shifted_coeffs,aligned_spikes] = shift_time(x,y,shuffle_times(n));
-    [Hxvalues, ~,bin] = histcounts(shifted_coeffs,xedges);
-    for i=1:numel(Hxvalues)
-        idx = find(bin==i);
-        shuffle_matrix(n,i) = sum(aligned_spikes(idx));
+    for n = 1:n_shifts
+        [shifted_coeffs,aligned_spikes] = shift_time(x,y,shuffle_times(n));
+        [Hxvalues, ~,bin] = histcounts(shifted_coeffs,xedges);
+        for i=1:numel(Hxvalues)
+            idx = find(bin==i);
+            shuffle_matrix(n,i) = sum(aligned_spikes(idx));
+        end
+        shuffle_matrix(n,:) = shuffle_matrix(n,:)./Hxvalues;%divide spikes by number of time
     end
-    shuffle_matrix(n,:) = shuffle_matrix(n,:)./Hxvalues;%divide spikes by number of time
+
+    %get mean of the bins
+    mean_matrix = nanmean(shuffle_matrix,1);
 end
-
-%get mean of the bins
-mean_matrix = nanmean(shuffle_matrix,1);
-
 %% plotting
-figure
-subplot(1,2,1)
-plot(xbc, tuning)
-ylim([0 1])
-subplot(1,2,2)
-plot(xbc, mean_matrix)
-ylim([0 1])
+if plotting
+    figure
+    hold on
+    subplot(1,2,1)
+    plot(xbc, tuning)
+    ylim([0 max(tuning) + 1])
+    subplot(1,2,2)
+    plot(xbc, mean_matrix)
+    ylim([0 max(tuning) + 1])
+end
 %% 
 function[shifted_coeffs,aligned_spikes] = shift_time(binned_coeffs,binned_spikes,n_bins)
     binned_coeffs(:,1:n_bins) = [];
