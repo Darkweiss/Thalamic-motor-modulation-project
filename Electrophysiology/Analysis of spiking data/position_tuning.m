@@ -1,4 +1,4 @@
-function[] = position_tuning(x,y,spikes, bins)
+function[] = position_tuning(x,y,spikes, bins,neuron)
 %%% x = X coordinates, y = Y coordinates, spikes = spikes for neuron
 N = numel(x);
 if numel(spikes)~=N
@@ -36,5 +36,5 @@ tuning = spike_n./N;%divide spikes by number of time
 
 figure
 bar3(tuning)
-
+title(num2str(neuron))
 end

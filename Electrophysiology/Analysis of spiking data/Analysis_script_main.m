@@ -1,14 +1,17 @@
 %%% FULL ANALYSIS SCRIPT
 
 % working folder where the data is saved
-work = 'C:\Users\mfbx5lg2\OneDrive - The University of Manchester\PhD project\Experiments\Chronic implants\mouse #6\Analysis\Day 4';
+work = 'C:\Users\mfbx5lg2\OneDrive - The University of Manchester\PhD project\Experiments\Chronic implants\mouse #6\Analysis\Day 5';
 %directory with body cam .csv files
-body_cams = 'C:\Ephys data\Chronic ephys\Chronic_mouse6_383781\bodycams\Day4';
+body_cams = 'C:\Ephys data\Chronic ephys\Chronic_mouse6_383781\bodycams\Day5';
 n_landmarks = 7; % enter the number of landmarks
-number_of_trials = 6; % enter the number of trials
+number_of_trials = 7; % enter the number of trials
 n_cameras = 4; % enter the number of cameras
 landmarks_for_deletion = [4];
 spike_threshold = 1000; %how many spikes a neuron has to fire to be analysed
+for i=1:number_of_trials
+    video{i}='Camera_1_trial_1_2021-11-10-104115-0000.avi';
+end
 %refined_landmarks = refined;
 %raw_landmarks = concatinated;
 %% prepare spiking data
@@ -21,7 +24,7 @@ spike_threshold = 1000; %how many spikes a neuron has to fire to be analysed
 % enter your path where ephys data is located in individual folders along
 % with a folder named 'kilosort' storing the kilosort output (end it with
 % \) also enter the number of trials
-ephys_path = 'C:\Ephys data\Chronic ephys\Chronic_mouse6_383781\ephys\Day4\';
+ephys_path = 'C:\Ephys data\Chronic ephys\Chronic_mouse6_383781\ephys\Day5\';
 % run this to store frame binned spikes for each trial along with the
 % template depths
 [synced_spikes, templateDepths] = Multi_file_ephys_sync(ephys_path,number_of_trials);
@@ -59,7 +62,7 @@ end
 [analysis_id,binned_coefficient,binned_spikes] = LargerBins(ephys_path,synced_spikes,coeffs,spike_threshold);
 
 %% Place cell plots
-selected_neurons = [3];
+selected_neurons = [301];
 for trial = 1:number_of_trials
     Place_cells(trial, selected_neurons, final_landmarks, synced_spikes)
     title(['Trial ' num2str(trial)])
@@ -73,8 +76,8 @@ end
 pmtrs.prctilelo = 2.5; %low-cutoff for for coefficient
 pmtrs.prctilehi = 97.5; %high-cutoff for for coefficient
 pmtrs.Nbins = 10; %number of bins for the coefficient
-[Eyx,xbc] = tuning_curve_bayes(binned_coefficient(7,:),binned_spikes(41,:),pmtrs);
+[Eyx,xbc] = tuning_curve_bayes(binned_coefficient(7,:),binned_spikes(analysis_id(3),:),pmtrs);
 
 %% A different approach to tuning curves with a time shift plot
-[tuning] = tuning_by_time(binned_coefficient(5,:),binned_spikes(analysis_id(67),:),pmtrs,1000,true)
+[tuning] = tuning_by_time(binned_coefficient(4,:),binned_spikes(analysis_id(75),:),pmtrs,1000,true)
 
