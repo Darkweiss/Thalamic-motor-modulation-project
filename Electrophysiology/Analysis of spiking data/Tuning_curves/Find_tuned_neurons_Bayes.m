@@ -2,7 +2,7 @@
 %get all the bins of Bayes tuning curves
 Eyx = {};
 for i=1:numel(analysis_id)
-[Eyx{i},xbc] = tuning_curve_bayes(binned_coefficient(6,:),binned_spikes(analysis_id(i),:),pmtrs);
+[Eyx{i},xbc] = tuning_curve_bayes(binned_coefficient(9,:),binned_spikes(analysis_id(i),:),pmtrs);
 end
 
 %% get the differences

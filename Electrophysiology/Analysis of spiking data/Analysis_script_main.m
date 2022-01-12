@@ -4,14 +4,13 @@
 work = 'C:\Users\mfbx5lg2\OneDrive - The University of Manchester\PhD project\Experiments\Chronic implants\mouse #6\Analysis\Day 5';
 %directory with body cam .csv files
 body_cams = 'C:\Ephys data\Chronic ephys\Chronic_mouse6_383781\bodycams\Day5';
-n_landmarks = 7; % enter the number of landmarks
+n_landmarks = 9; % enter the number of landmarks
 number_of_trials = 7; % enter the number of trials
 n_cameras = 4; % enter the number of cameras
-landmarks_for_deletion = [4];
+landmarks_for_deletion = [];
 spike_threshold = 1000; %how many spikes a neuron has to fire to be analysed
-for i=1:number_of_trials
-    video{i}='Camera_1_trial_1_2021-11-10-104115-0000.avi';
-end
+video='Camera_1_trial_1_2021-11-10-104115-0000.avi'; %of the first trial
+
 %refined_landmarks = refined;
 %raw_landmarks = concatinated;
 %% prepare spiking data
@@ -48,19 +47,19 @@ Nshape = 3; %number of PC
 vec = vec(:,end:-1:end-Nshape+1);
 
 %get coefficients
-for i = 1:number_of_trials
-    [coeffs{i}, nans{i}] = DecomPose(final_landmarks{i},video{i},vec,false,false);
-    i
-end
-clear i
+[coeffs, nans] = DecomPose(final_landmarks,video,vec,false,false);
 
-for i = 1:number_of_trials
-    synced_spikes{i}(:,nans{i}) = [];
-    final_landmarks{i}(:,:,nans{i}) = [];
-end
+
+% for i = 1:number_of_trials
+%     synced_spikes{i}(:,nans{i}) = [];
+%     final_landmarks{i}(:,:,nans{i}) = [];
+% end
 %% put data in larger bins
 [analysis_id,binned_coefficient,binned_spikes] = LargerBins(ephys_path,synced_spikes,coeffs,spike_threshold);
 
+%% locomotion coefficient
+[locomotion_coeff] = locomotion(binned_coefficient);
+binned_coefficient = [binned_coefficient;locomotion_coeff'];
 %% Place cell plots
 selected_neurons = [301];
 for trial = 1:number_of_trials

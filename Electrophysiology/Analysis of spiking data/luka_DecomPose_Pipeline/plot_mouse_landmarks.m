@@ -17,7 +17,8 @@ lm_color = [...
      1 .8 0;
      1 0 0;
      .4 0 1;
-     0 0 .5];
+     0 0 .5
+     0 1 0];
 
 for i = 1:Nlm
 if markerfacecolor

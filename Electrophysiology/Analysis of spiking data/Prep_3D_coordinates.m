@@ -18,10 +18,11 @@ for n_trials = 1:numel(spikes)
 end %end trial loop
 refined_landmarks(:,:,idx) = [];
 
+final_landmarks = refined_landmarks;
 %% split 3D landmarks back into trials (cell array)
-frames = 1;
-for i_trials = 1:numel(spikes)
-    final_landmarks{i_trials} = refined_landmarks(:,:,(frames:(frames + numel(spikes{1}(1,:)) - 1)));
-    frames = frames + numel(spikes{1}(1,:));
-end %end trial loop
+% frames = 1;
+% for i_trials = 1:numel(spikes)
+%     final_landmarks{i_trials} = refined_landmarks(:,:,(frames:(frames + numel(spikes{1}(1,:)) - 1)));
+%     frames = frames + numel(spikes{1}(1,:));
+% end %end trial loop
 end %end function

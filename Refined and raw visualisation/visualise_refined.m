@@ -1,9 +1,9 @@
 %This code plots 2 3D views and a video of the mouse and a tsne plot with
 %kmeans clustered labels 
 function[] = visualise_refined(refined, raw, video)
-Np = 7;
+Np = 9;
 line_color = 'k';
-cval = 'rbbccgmy';
+cval = 'rbbcckgmy';
 figure('units','normalized','outerposition',[0 0 1 1]); h = subplot(2,2,1); hold on;
 views = [[180 90],[90 0]];
 poses{1} = refined;
