@@ -41,11 +41,13 @@ cd(work)
 save('3D_landmarks', 'final_landmarks');
 
 %% get coefficients for 3D landmarks
+%put data in a cell array so DecomPose_PCA works
+final_landmarks = {final_landmarks};
 %run PCA on data
 Nshape = 3; %number of PC
 [vec,val] = DecomPose_PCA(final_landmarks, Nshape);
 vec = vec(:,end:-1:end-Nshape+1);
-
+final_landmarks =final_landmarks{1};
 %get coefficients
 [coeffs, nans] = DecomPose(final_landmarks,video,vec,false,false);
 

@@ -23,7 +23,7 @@ StatesRaster(2,:) = StatesRaster_var;
 clear MethodAssign DataRaster VariableIDs Method
 %% iterate over neurons and get mutual information
 %initiate the matrix to store the information
-IT_matrix = NaN(numel(spikes(:,1),3));
+IT_matrix = NaN(numel(spikes(:,1),4));
 for i=1:numel(spikes(:,1))
 DataRaster = spikes(i,:);
 % State the data using uniform  bins
@@ -39,6 +39,11 @@ VariableIDs = {1,1,1;1,2,1}; % Variables 1 and 2 (real interaction)
 Method = 'Ent';
 VariableIDs = {1,1,1};
 IT_matrix(i,3) = instinfo(StatesRaster, Method, VariableIDs);
+
+%bias
+[bias] = calculate_bias(StatesRaster);%currenly in our case Rs is equal to the 
+IT_matrix(i,4) = IT_matrix(i,1) - bias;
+
 i
 end %end neuron iteration
 end

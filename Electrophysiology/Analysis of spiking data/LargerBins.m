@@ -5,7 +5,7 @@ bad_idx = find(rez.good==0); %get the 'bad' kilosort neurons
 
 %concatinate the coeffs and spikes
 all_spikes = [];
-all_coeffs = coeffs{1};
+all_coeffs = coeffs;
 for trial = 1:size(spikes,2)
     all_spikes = cat(2,all_spikes,spikes{trial});
     %all_coeffs = cat(1,all_coeffs,coeffs{trial});
