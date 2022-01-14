@@ -3,9 +3,9 @@
 % working folder where the data is saved
 work = 'C:\Users\mfbx5lg2\OneDrive - The University of Manchester\PhD project\Experiments\Chronic implants\mouse #6\Analysis\Day 5';
 %directory with body cam .csv files
-body_cams = 'C:\Ephys data\Chronic ephys\Chronic_mouse6_383781\bodycams\Day5';
-n_landmarks = 9; % enter the number of landmarks
-number_of_trials = 7; % enter the number of trials
+body_cams = 'C:\Ephys data\Chronic ephys\Chronic_mouse6_383781\bodycams\Day4';
+n_landmarks = 7; % enter the number of landmarks
+number_of_trials = 6; % enter the number of trials
 n_cameras = 4; % enter the number of cameras
 landmarks_for_deletion = [];
 spike_threshold = 1000; %how many spikes a neuron has to fire to be analysed

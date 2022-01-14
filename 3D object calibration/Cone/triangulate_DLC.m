@@ -13,7 +13,6 @@ function[coordinates_3D,miss] = triangulate_DLC(files,P)
 Nbp = 9; %nr of bodyparts
 Ncam = 4; %nr of cameras
 THlike = 0.6;
-load Camera_move_P_in_cm.mat
 good_camera = true(Nbp,Ncam);
 x_multi = cell(1,Nbp);
 
@@ -25,9 +24,9 @@ for n = 1:Ncam
     %get Nframe (number of frames) and Nbp (number body points)  
     [Nframe,Nbp] = size(temp);
     
-    Nbp = Nbp/2; %used for csv files directly for labelling (only x and y coordinates without likelyhood) -  comment out following for loops until data{n}=temp;
+    %Nbp = Nbp/2; %used for csv files directly for labelling (only x and y coordinates without likelyhood) -  comment out following for loops until data{n}=temp;
     
-    %Nbp = Nbp/3; %used for csv files following DLC network training (x,y,likelyhood => for loops necessary)
+    Nbp = Nbp/3; %used for csv files following DLC network training (x,y,likelyhood => for loops necessary)
     
 %    input NaN where thereshold is less than specified
     for i_frames=1:numel(temp(:,1))
