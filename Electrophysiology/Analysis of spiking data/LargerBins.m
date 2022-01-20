@@ -21,7 +21,7 @@ analysis_id = find(~isnan(all_spikes(:,1)));
 %bin the data to larger bins
 bins = 1:10:numel(all_spikes(1,:));%initialise the bins
 %spikes
-binned_spikes = zeros(numel(all_spikes(:,1)),numel(bins));
+binned_spikes = zeros(numel(all_spikes(:,1)),numel(bins)-1);
 for neuron_id = 1:numel(all_spikes(:,1))
     for idx_bins = 1:1:numel(bins)-1
         binned_spikes(neuron_id,idx_bins) = sum(all_spikes(neuron_id,bins(idx_bins):(bins(idx_bins + 1) - 1) ),2);
@@ -30,7 +30,7 @@ for neuron_id = 1:numel(all_spikes(:,1))
 end
 
 %coefficients
-binned_coefficient = zeros(numel(all_coeffs(1,:)),numel(bins));
+binned_coefficient = zeros(numel(all_coeffs(1,:)),numel(bins)-1);
 for i_coeff = 1:numel(all_coeffs(1,:))
     for idx_bins = 1:1:numel(bins)-1
         binned_coefficient(i_coeff,idx_bins) = mean(all_coeffs(bins(idx_bins):(bins(idx_bins + 1) - 1), i_coeff ));
