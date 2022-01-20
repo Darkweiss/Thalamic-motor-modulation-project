@@ -1,12 +1,12 @@
 %This code plots 2 3D views and a video of the mouse and a tsne plot with
 %kmeans clustered labels 
 %% initialise
-Np = 7;
+Np = 9;
 line_color = 'k';
-cval = 'rbbcgmrbbcgm';
+cval = 'rbbccgkym';
 figure; h = subplot(1,2,1); hold on;
-poses = final_landmarks{2};
-video = 'C:\Ephys data\Chronic ephys\Chronic_mouse6_383781\bodycams\Day4\Camera_3_trial_2_2021-11-09-143329-0000.avi';
+poses = final_landmarks_trial{6};
+video = 'C:\Ephys data\Chronic ephys\Chronic_mouse6_383781\bodycams\Day5\Camera_3_trial_6_2021-11-10-115750-0000.avi';
 obj = VideoReader([video]);
 views = [[180 90],[90 0]];
 

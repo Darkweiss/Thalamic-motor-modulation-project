@@ -1,4 +1,4 @@
-function [final_landmarks] = Prep_3D_coordinates(refined_landmarks,spikes, bad_frames)
+function [final_landmarks,final_landmarks_trial] = Prep_3D_coordinates(refined_landmarks,spikes, bad_frames)
 %% add back the bad frames to refined landmakrs as NaNs
 %bad frames could not be refined as not enough landmarks are visible; they
 %need to be sorted by size!!!
@@ -20,9 +20,9 @@ refined_landmarks(:,:,idx) = [];
 
 final_landmarks = refined_landmarks;
 %% split 3D landmarks back into trials (cell array)
-% frames = 1;
-% for i_trials = 1:numel(spikes)
-%     final_landmarks{i_trials} = refined_landmarks(:,:,(frames:(frames + numel(spikes{1}(1,:)) - 1)));
-%     frames = frames + numel(spikes{1}(1,:));
-% end %end trial loop
+frames = 1;
+for i_trials = 1:numel(spikes)
+    final_landmarks_trial{i_trials} = refined_landmarks(:,:,(frames:(frames + numel(spikes{1}(1,:)) - 1)));
+    frames = frames + numel(spikes{1}(1,:));
+end %end trial loop
 end %end function

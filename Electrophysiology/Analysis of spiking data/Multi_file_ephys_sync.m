@@ -1,8 +1,10 @@
 function [synced_spikes, templateDepths] = Multi_file_ephys_sync(path,number_of_trials)
-% Input: the directory with all ephys files inside and the number of trials and store individual trials in a struct
+% Multi_file_ephys_sync returns binned spike count for all kilosort
+% detected neurons and the depth of these neurons
+% Input: the directory with all ephys files inside and the number of trials 
 % Output: 
-% Synced_spikes - Spike timings for individual trials
-% templateDepths - Depths of all templates
+% Synced_spikes - Binned spikes for individual trials
+% templateDepths - Depths of all templates (neurons)
 
 %move to the directory path
 cd(path)
@@ -12,8 +14,7 @@ spike_timings   = readNPY([kilosort_path 'spike_times.npy']); %read Kilosort spi
 spike_times     = double(spike_timings)/30000; %get the spike timings in s
 single_spikes   = readNPY([kilosort_path 'spike_clusters.npy']); %cluster IDs
 %% get spike depths with a helper function
-%you need Spikes for ephys data analysis for this to work and add it's path
-%here
+%you need Spikes for ephys data analysis for this to work
 addpath(kilosort_path)
 load rez
 winv = readNPY('whitening_mat.npy');
@@ -28,10 +29,9 @@ temps = readNPY('templates.npy');
 %     synced_spikes = zeros(numel(templateDepths),numel(frame_timings));
 spikes = cell(1,numel(templateDepths));
 for template_id = 0:(numel(templateDepths)-1)
-    single_spikes_neuron = single_spikes==template_id; %booleans where selected neuron is spiking or not
-    idx                  = find(single_spikes_neuron); %get indicies when selected neuron is spiking
-    spikes{template_id + 1}               = spike_times(idx); % spike times of selected neuron
-    template_id
+    idx                     = find(single_spikes==template_id); %get indicies when selected neuron is spiking
+    spikes{template_id + 1} = spike_times(idx); % spike times of selected neuron
+    disp(["extracting spikes from individual neurons; Current neuron: " + num2str(template_id)]);
 end % end template_id loop
 %initialise the matrix to store the complete data
 synced_spikes = cell(1,number_of_trials);
@@ -43,13 +43,10 @@ for trial_n = 1: number_of_trials
     frame_timings{trial_n} = double(readNPY([path file.name '\Record Node 122\experiment1\recording1\events\Neuropix-PXI-100.0\TTL_1\timestamps.npy'])); %get frame times
     frame_timings{trial_n}      = frame_timings{trial_n}/30000;
     frame_timings{trial_n}(1:2) = []; %remove the starting pulse
-    trial_length  = numel(frame_timings{trial_n})/(2*30); %get trial_length in s
     frame_timings{trial_n}(1:2:numel(frame_timings{trial_n}))     = []; %remove every 2nd event as this is the down phase of the TTL pulse
     continuous_timestamps = readNPY([path file.name '\Record Node 122\experiment1\recording1\continuous\Neuropix-PXI-100.0\timestamps.npy']); %read the neuropixel timestamps
     continuous_timestamps = double(continuous_timestamps)/30000;
     frame_timings{trial_n} = frame_timings{trial_n} - continuous_timestamps(1); %subtract the timestamps because events are counted from the start of acquisition not recordings
-    
-
     
     %get spikes for each frame - check if they are between two intervals
     %(frames) and to that add the start time (increasing for each trial)
@@ -61,8 +58,6 @@ for trial_n = 1: number_of_trials
         disp(['Trial number: ' num2str(trial_n) ' neuron number: ' num2str(neuron)]);
     end %end neuron loop
     
-    %add to the trial start time
-    start = start + (continuous_timestamps(end)-continuous_timestamps(1));
-    %clear continuous_timestamps
+    start = start + (continuous_timestamps(end)-continuous_timestamps(1));%add to the trial start time
 end % end trial number
 end % end function

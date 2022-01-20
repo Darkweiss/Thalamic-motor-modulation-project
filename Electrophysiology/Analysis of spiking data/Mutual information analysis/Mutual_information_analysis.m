@@ -1,5 +1,5 @@
-function[IT_matrix, var_entropy] = Mutual_information_analysis(variable, spikes, varbins,spikebins)
-%%% mutual information analysis
+function[IT_matrix, var_entropy] = Mutual_information_analysis(variable, spikes, varbins,spikebins, bias_id)
+%%% mutual information analysis with Panzeri Treves bias correction
 %%% This function returns the mutual information between a variable and the
 %%% spike count
 %%% Input:
@@ -32,9 +32,13 @@ DataRaster = spikes(i,:);
 % State the data using uniform  bins
 MethodAssign = {1,1,'UniCB',{spikebins}};
 StatesRaster(1,:) = data2states(DataRaster, MethodAssign);
+if strcmp(bias_id, 'PT')
 % calculate bias according to PT
-[bias] = calculate_bias(StatesRaster);%currenly in our case Rs is equal to the 
-
+    [bias] = calculate_bias(StatesRaster);%currenly in our case Rs is equal to the 
+elseif strcmp(bias_id, 'QE')
+    MI_QE(StatesRaster);
+else    
+end
 % Perform the information calculation for the single trial across all time
 % bins
 Method1 = 'PairMI';
