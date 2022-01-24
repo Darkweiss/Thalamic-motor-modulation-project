@@ -1,7 +1,7 @@
 %concatinate all the files for kilosort and read the corresponding body cam
 %triggers
 %% get file names
-path = 'C:\Ephys data\Chronic ephys\Chronic_mouse6_383781\ephys\Day5\'; %this is the path where the folders produced by openephys are
+path = 'Z:\Luka PhD\Yr1 Chronic Ephys\Chronic_mouse6_383781\Ephys\Day9\'; %this is the path where the folders produced by openephys are
 cd(path);
 Files = dir(path);
 %get file names

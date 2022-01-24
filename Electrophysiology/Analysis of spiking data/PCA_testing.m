@@ -23,7 +23,9 @@ for trial = 1:6
 end
    
 PCA = PCA';
-%PCA = zscore(PCA,[],1);
+
+PCA = binned_spikes(analysis_id(10:30),:)';
+PCA = normalize(PCA,1);
 
 [eigenvectors,reduced_dimensions,eigenvalues,tsquared,explained]=pca(PCA);
 explained(1:10)
