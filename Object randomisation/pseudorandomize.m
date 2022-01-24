@@ -3,6 +3,9 @@ function[schedule] = pseudorandomize(n_days,n_trials)
 schedule = zeros(n_days,n_trials);
 trial = 1:n_trials;
 schedule(1,:) = trial(randperm(length(trial)));
+if n_days >= factorial(n_trials)
+    error('Too many days for the sequence to not repeat')
+end
 for i = 2:n_days
     equal = 1;
     while equal
