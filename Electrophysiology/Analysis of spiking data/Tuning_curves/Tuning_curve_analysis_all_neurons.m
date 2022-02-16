@@ -1,7 +1,7 @@
 %% get largest differences in tuning curves
 Eyx = {};
 for i=1:numel(analysis_id)
-[Eyx{i}] = tuning_by_time(binned_coefficient(4,:),binned_spikes(analysis_id(i),:),pmtrs,1000,false);
+[Eyx{i}] = tuning_by_time(binned_coefficient(9,:),binned_spikes(analysis_id(i),:),pmtrs,1000,false);
 end
 
 %% get the differences
