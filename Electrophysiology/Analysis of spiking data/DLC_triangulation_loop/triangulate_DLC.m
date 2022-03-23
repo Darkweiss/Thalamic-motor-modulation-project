@@ -7,7 +7,7 @@
 %%%P is the camera matrix
 %%% files is a cell array of individual camera files
 %%%IF THE POINT CANNOT BE TRIANGULATED AS IT IS NOT DETECTED BY ENOUGH
-%%%CAMERAS IT IS SET AT 0 0 0
+%%%CAMERAS IT IS SET AS NaN
 
 function[coordinates_3D,miss] = triangulate_DLC(files,P)
 Nbp = 10;
