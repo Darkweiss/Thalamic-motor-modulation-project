@@ -10,9 +10,9 @@
 %%%CAMERAS IT IS SET AS NaN
 
 function[coordinates_3D,miss] = triangulate_DLC(files,P)
-Nbp = 10;
+Nbp = 9;
 Ncam = 4;
-THlike = 0.6;
+THlike = 0.4; %0.6 prev
 
 good_camera = true(Nbp,Ncam);
 x_multi = cell(1,Nbp);

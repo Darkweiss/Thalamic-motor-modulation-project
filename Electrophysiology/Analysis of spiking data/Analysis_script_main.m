@@ -1,7 +1,7 @@
 %%% FULL ANALYSIS SCRIPT
 
 % working folder where the data is saved
-work = 'C:\Users\mfbx5lg2\OneDrive - The University of Manchester\PhD project\Experiments\Chronic implants\mouse #6\Analysis\Day 5';
+work = 'C:\Users\mfbx5lg2\OneDrive - The University of Manchester\PhD project\Experiments\Chronic implants\mouse #6\Analysis\Day 4';
 
 %directory with body cam .csv files
 body_cams = 'C:\Ephys data\Chronic ephys\Chronic_mouse6_383781\bodycams\Day5';
@@ -32,12 +32,18 @@ save('ephys','synced_spikes','templateDepths');
 %% triangulate the body cam data for SSM
 % before using the next function, load your camera matrix as 'P'
 [concatinated, separated] = Triangulation_loop(body_cams,P, number_of_trials, n_cameras);
-[nan_idx, coordinates_no_nan] = modify_3D(concatinated,landmarks_for_deletion);
 
-[Data_3D_refined,b,T] = main_3D_SSM_reconstruct_luka_v1(coordinates_no_nan);
-[final_landmarks,final_landmarks_trial] = Prep_3D_coordinates(Data_3D_refined,synced_spikes,nan_idx);
+% Estimation_Model function eceives the 3D data and return the Data which all missing data filled up and  mean
+% estimated by Ransac, Mean of pPCA, Covariance of pPCA and Eigenvalues
+% and eigenpose
+[Data_3D_KNN Mean_Ransac_3D Mean_pPCA Cov_pPCA eignValues eignVectors]=Estimation_Model(concatinated,0.8);
+
+%the input is the 3D Rawdata (it is suggested use the Data_3D_KNN which has no missing values) and the output is 3D reconstructed data which
+%backed to original place in the arena. 
+
+[Recounstructed_Data_full]=Reconstruct_Data(concatinated,Data_3D_KNN,0.99,Mean_Ransac_3D,Mean_pPCA,Cov_pPCA);
 cd(work)
-save('3D_landmarks', 'final_landmarks','final_landmarks_trial');
+save('3D_landmarks', 'Recounstructed_Data_full');
 
 %% get coefficients for 3D landmarks
 %run PCA on data
