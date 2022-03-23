@@ -40,7 +40,7 @@ end
 %video
 if vid_path
     writerObj = VideoWriter([vid_path name]);
-    writerObj.FrameRate = 60;
+    writerObj.FrameRate = 15;
     % set the seconds per image
     % open the video writer
     open(writerObj);
