@@ -1,5 +1,5 @@
 function mouse_plotting(poses,vid_path,name)
-colours = 'rbbggcmkk';
+colours = 'rbbggcmkkkk';
 figure
 
 for i = 1:numel(poses(1,1,:))
