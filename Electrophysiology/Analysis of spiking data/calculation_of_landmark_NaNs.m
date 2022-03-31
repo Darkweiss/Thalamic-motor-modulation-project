@@ -1,5 +1,5 @@
-NaNs = zeros(9,75600);
-for i = 1:9
+NaNs = zeros(11,75600);
+for i = 1:11
     for n=1:75600
         NaNs(i,n) = isnan(concatinated(i,1,n));
     end

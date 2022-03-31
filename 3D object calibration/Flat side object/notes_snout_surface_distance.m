@@ -11,13 +11,13 @@ load(file,'coordinates','final_landmarks','synced_spikes')
 Pfile = 'C:\Users\mjcssrp\Dropbox (The University of Manchester)\170320\lab and lab meetings\motor state project\luka object landmarks nov2021-jan2022\Data for Rasmus\Pcal_rp';
 load(Pfile,'P')
 
-video = 'C:\Ephys data\Chronic ephys\Chronic_mouse6_383781\bodycams\Day5\Camera_1_trial_2_2021-11-10-110746-0000.avi';
+video = 'C:\DeepLabCut\Luka\Mouse 8 Day 1 object_1-Luka-2022-03-29\videos\camera_3_trial_6_2021-12-06-150725-0000.avi';
 
 %%
 vh = VideoReader(video);
 im = readFrame(vh);
 
-coordinates = trial2_mouse(:,:,1);
+coordinates = coordinates_all{5};
 Ncoord = size(coordinates,1);
 
 for i = 1:4
