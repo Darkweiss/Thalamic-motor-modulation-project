@@ -1,4 +1,4 @@
-folder = 'C:\Ephys data\Chronic ephys\Chronic_mouse6_383781\bodycams\Day5\Robust net iteration 1' ;
+folder = 'C:\Users\ganta\Github\Motor_modulation_pipeline\Test data\csv DLC files' ;
 n_cameras = 4;
 
 cd(folder)

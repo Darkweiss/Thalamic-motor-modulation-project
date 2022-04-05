@@ -5,3 +5,4 @@ for i = 1:9
     end
 end
 sum_NaNs = sum(NaNs,2)'
+sum_NaNs = sum_NaNs/75600
