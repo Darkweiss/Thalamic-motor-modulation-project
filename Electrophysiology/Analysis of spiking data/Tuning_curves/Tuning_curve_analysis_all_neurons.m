@@ -7,7 +7,7 @@ end
 %% get the differences
 diff =[];
 for i=1:numel(analysis_id)
-diff(i) = max(Eyx{i})-min(Eyx{i});
+diff(i) = max(Eyx{i})-min(Eyx{i})-median(Eyx{i});
 end
 [sorted, pre_idx] = sort(diff);
 sorted(end-10:end)

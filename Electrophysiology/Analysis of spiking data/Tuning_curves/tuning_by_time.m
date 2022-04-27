@@ -1,7 +1,11 @@
 function[tuning] = tuning_by_time(x,y,pmtrs,n_shifts,plotting)
-%%% This function takes as input a coefficient (x), single neuron spikes
-%%% (y), parameters (same as in tuning_curve_bayes), and the number of
-%%% shifts
+% This function takes as input a vector with a variable value for each 
+% frame(x), number of single neuron spikes for each frame (y), parameters
+% struct (prctilelo - low percentile cutoff, prctilehi - high percentile
+% cutoff and Nbins - the number of bins to bin the data)
+% and the number of shifts (n_shitfts) to show a baseline distribution of
+% spiking for the neuron
+% The output is the figure of the tuning curve and the values of tuning
 N = numel(x);
 if numel(y)~=N
     error('x and y must be same size')
