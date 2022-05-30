@@ -5,8 +5,8 @@ if numel(spikes)~=N
     error('x and spikes must be same size')
 end
 
-lo = 2;
-high = 98;
+lo = 0;
+high = 100;
 xmin = prctile(x,lo);
 xmax = prctile(x,high);
 
@@ -35,6 +35,6 @@ end
 tuning = spike_n./N;%divide spikes by number of time
 
 figure
-bar3(tuning)
+pcolor(tuning)
 title(num2str(neuron))
 end
